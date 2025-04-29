@@ -1,13 +1,14 @@
 # test-tableau-mcp
-a quick POC to expose Tableau VDS endpoints through an MCP server and integrate them with Claude Desktop client
+This project is a quick prototype to expose Tableau VDS endpoints through an MCP server and integrate them with Claude Desktop client.
 
-To run this MCP Server and connect it Claude Desktop follow these steps (this was adapted from the [how-to guide here](https://modelcontextprotocol.io/quickstart/server). These instructions assume you are using MacOS/Linux. If you're running Windows, refer to the how-to guide linked above.
+To run this MCP Server and connect it Claude Desktop follow these steps. These instructions were adapted from the [MCP how-to guide](https://modelcontextprotocol.io/quickstart/server). These instructions assume you are using MacOS/Linux. If you're running Windows, refer to the how-to guide linked above.
 
 ## System requirements
 Python 3.10 or higher installed.
 You must use the Python MCP SDK 1.2.0 or higher.
 
 ## Set up your environment
+Install UV if you haven't already.
 ```python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
@@ -33,7 +34,7 @@ This simple prototype requires that you harcode 4 variables in vds.py file:
 `uv --directory <ABSOLUTE PATH TO PROJECT> run vds.py`
 
 ## Testing your server with Claude for Desktop
-First, make sure you have Claude for Desktop installed. You can install the latest version here. If you already have Claude for Desktop, make sure it’s updated to the [latest version](https://claude.ai/download).
+First, make sure you have Claude for Desktop installed. You can install the [latest version here](https://claude.ai/download). If you already have Claude for Desktop, make sure it’s updated to the latest version.
 
 We’ll need to configure Claude for Desktop for whichever MCP servers you want to use. To do this, open your Claude for Desktop App configuration at `~/Library/Application Support/Claude/claude_desktop_config.json` in a text editor. Make sure to create the file if it doesn’t exist.
 
@@ -62,12 +63,10 @@ You may need to put the full path to the uv executable in the command field. You
 
 This tells Claude for Desktop:
 
-There’s an MCP server named “vds”
-To launch it by running `uv --directory /ABSOLUTE/PATH/TO/PARENT/FOLDER/ run vds.py`
-Save the file, and restart Claude for Desktop.
+There’s an MCP server named “vds.” Launch it by running `uv --directory /ABSOLUTE/PATH/TO/PARENT/FOLDER/ run vds.py`. Save the file, and restart Claude for Desktop.
 
 ## Running queries in Claude to trigger the tool
-The VDS API syntax is not explicitly passed in MCP tools so start your session by passing a few in context samples for properly formatted `Query` objects. You can copy the array of dictionaries in the samples.py file like so:
+The VDS API syntax is not explicitly passed in MCP tools, so start your session by passing a few in context samples that show Claude how to properly format `Query` objects. You can copy the array of dictionaries in the samples.py. Send an inital message to Claude like so:
 make sure you generate payloads according to this syntax:
 ```
 in_context_samples = [
